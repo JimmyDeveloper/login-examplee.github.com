@@ -47,7 +47,8 @@
           const user = userCredential.user;
           console.log("Logged in:", user.uid);
 
-          // Perform any additional actions after login (e.g., redirecting)
+          // Redirect to iniciodetodo.html
+          window.location.href = "iniciodetodo.html";
         })
         .catch((error) => {
           // Login failed
