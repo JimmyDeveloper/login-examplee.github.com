@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js"></script>
+
+  <!-- Firebase Configuration -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8hSfZNCfBNngwTFqYMe6slhTL2EA2Bcw",
+      authDomain: "login-examplee.firebaseapp.com",
+      projectId: "login-examplee",
+      storageBucket: "login-examplee.appspot.com",
+      messagingSenderId: "577902029191",
+      appId: "1:577902029191:web:afff929c12d318d329cb22"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Login form submission
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Firebase login
+      auth.signInWithEmailAndPassword(username, password)
+        .then((userCredential) => {
+          // Login successful
+          const user = userCredential.user;
+          console.log("Logged in:", user.uid);
+
+          // Perform any additional actions after login (e.g., redirecting)
+        })
+        .catch((error) => {
+          // Login failed
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("Login error:", errorCode, errorMessage);
+        });
+    });
+  </script>
+</body>
+</html>
